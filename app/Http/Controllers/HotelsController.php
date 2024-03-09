@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Hotel;
 use App\Models\City;
+use App\Models\Hotel;
 
 class HotelsController extends Controller {
     /*
@@ -21,7 +21,7 @@ class HotelsController extends Controller {
      */
 
     public function create() {
-        $cities = City::all(); // Assuming you have a City model
+        $cities = City::all();
         return view('hotels.create', ['cities' => $cities]);
     }
 
@@ -46,32 +46,29 @@ class HotelsController extends Controller {
      * Shows Hotel Details
      */
 
-    public function show($id) {
-        $hotel = Hotel::findOrFail($id);
-        return view('hotels.show', ['hotel' => $hotel]);
+    public function show(Hotel $hotel) {
+        return view('hotels.show', compact('hotel'));
     }
 
     /*
      * Edits Hotel
      */
 
-    public function edit($id) {
-        $hotel = Hotel::findOrFail($id);
-        return view('hotels.edit', ['hotel' => $hotel]);
+    public function edit(Hotel $hotel) {
+        return view('hotels.edit', compact('hotel'));
     }
 
     /*
      * Updates Hotel
      */
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, Hotel $hotel) {
         $request->validate([
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
         ]);
 
-        $hotel = Hotel::findOrFail($id);
         $hotel->update($request->all());
 
         return redirect()->route('hotels.index')
@@ -82,8 +79,7 @@ class HotelsController extends Controller {
      * Deletes Hotel
      */
 
-    public function destroy($id) {
-        $hotel = Hotel::findOrFail($id);
+    public function destroy(Hotel $hotel) {
         $hotel->delete();
 
         return redirect()->route('hotels.index')

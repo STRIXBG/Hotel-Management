@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use App\Models\User;
 
 class ReservationsController extends Controller {
     /*
@@ -20,7 +21,8 @@ class ReservationsController extends Controller {
      */
 
     public function create() {
-        return view('reservations.create');
+        $users = User::select('id', 'name')->get();
+        return view('reservations.create', ['users' => $users]);
     }
 
     /*
@@ -29,7 +31,11 @@ class ReservationsController extends Controller {
 
     public function store(Request $request) {
         $request->validate([
-                // Правила за валидация на данните
+            'hotel_id' => 'required',
+            'room_number' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'user_id' => 'required',
         ]);
 
         Reservation::create($request->all());
@@ -51,7 +57,8 @@ class ReservationsController extends Controller {
      */
 
     public function edit(Reservation $reservation) {
-        return view('reservations.edit', compact('reservation'));
+        $users = User::select('id', 'name')->get();
+        return view('reservations.edit', compact('reservation', 'users'));
     }
 
     /*
@@ -60,6 +67,11 @@ class ReservationsController extends Controller {
 
     public function update(Request $request, Reservation $reservation) {
         $request->validate([
+            'hotel_id' => 'required',
+            'room_number' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'user_id' => 'required',
         ]);
 
         $reservation->update($request->all());
