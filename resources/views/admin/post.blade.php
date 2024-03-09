@@ -1,1 +1,3 @@
-<h1>Admin Post Page</h1>
+<x-app-layout>
+    
+</x-app-layout>
