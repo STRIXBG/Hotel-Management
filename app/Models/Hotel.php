@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model {
 
+    use HasFactory;
+
     protected $table = 'hotels';
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -16,5 +18,15 @@ class Hotel extends Model {
         'city_id',
     ];
 
-    use HasFactory;
+    public function city() {
+        return $this->belongsTo(City::class);
+    }
+
+    public function rooms() {
+        return $this->hasMany(Room::class);
+    }
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
 }

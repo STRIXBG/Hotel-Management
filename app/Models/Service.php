@@ -5,9 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Services extends Model
-{
+class Services extends Model {
+
     protected $table = 'services';
-    
-    use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+    ];
+
+    public function hotels() {
+        return $this->belongsToMany(Hotel::class);
+    }
 }

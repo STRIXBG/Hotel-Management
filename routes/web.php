@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\ReservationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +24,10 @@ Route::get('/', function () {
 });
 
 //Route::resource('/hotels', [HotelsController::class, 'index']);
-Route::resource('hotels', HotelsController::class);
+Route::resource('/hotels', HotelsController::class);
+Route::resource('/cities', CitiesController::class);
+Route::resource('/rooms', RoomsController::class);
+Route::resource('/reservations', ReservationsController::class);
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 

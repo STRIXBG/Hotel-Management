@@ -16,13 +16,15 @@ return new class extends Migration {
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms');
-            $table->date('start_date');
+            $table->date('start_date')->default(now());
             $table->date('end_date');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
+    
+    
 
     /**
      * Reverse the migrations.
