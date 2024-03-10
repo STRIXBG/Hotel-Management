@@ -13,8 +13,30 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        Табло за управление
+                        {{ __('Dashboard') }}
                     </x-nav-link>
+                    <!-- Language Switcher -->
+                    <div class="hidden sm:flex items-center ml-6">
+                        <!-- Language Dropdown -->
+                        <x-dropdown align="right" width="auto">
+                            <x-slot name="trigger">
+                                <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out">
+                                    <span>{{ strtoupper(app()->getLocale()) }}</span>
+                                    <svg class="fill-current h-4 w-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 12a2 2 0 0 1-2-2V5a1 1 0 1 1 2 0v5h8a1 1 0 0 1 0 2h-8v3a2 2 0 0 1-2 2 1 1 0 0 1 0-2h8v-1a2 2 0 0 0-2-2zm0-12a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-2 10a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2h-8z"/></svg>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                @foreach(config('app.available_locales') as $locale)
+                                @if($locale !== app()->getLocale())
+                                <x-dropdown-link :href="route('switch.language', $locale)">
+                                    {{ strtoupper($locale) }}
+                                </x-dropdown-link>
+                                @endif
+                                @endforeach
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
                 </div>
             </div>
 
@@ -45,7 +67,7 @@
 
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
-                                            this.closest('form').submit();">
+                                                     this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
@@ -70,7 +92,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Табло за управление
+                {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -93,7 +115,7 @@
 
                     <x-responsive-nav-link :href="route('logout')"
                                            onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                                                   this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>

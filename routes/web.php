@@ -21,6 +21,15 @@ use Illuminate\Support\Facades\Route;
   |
  */
 
+// Languages
+Route::get('language/{locale}', function ($locale) {
+    if (in_array($locale, config('app.available_locales'))) {
+        app()->setLocale($locale);
+        session()->put('locale', $locale);
+    }
+
+    return redirect()->back();
+})->name('switch.language');
 
 // Hotel Management Routes
 Route::middleware(['auth'])->group(function () {
