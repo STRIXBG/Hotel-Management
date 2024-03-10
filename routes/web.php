@@ -8,6 +8,7 @@ use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AppCommentsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,9 +47,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Dashboard Routes
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/hotels', [DashboardController::class, 'hotels'])->name('dashboard.hotels');
+    Route::get('/dashboard/rooms', [DashboardController::class, 'profile'])->name('dashboard.rooms');
+    Route::get('/dashboard/reservations', [DashboardController::class, 'profile'])->name('dashboard.reservations');
+    Route::get('/dashboard/services', [DashboardController::class, 'profile'])->name('dashboard.services');
+    Route::get('/dashboard/upgrade', [DashboardController::class, 'profile'])->name('dashboard.upgrade');
+    Route::get('/dashboard/help', [DashboardController::class, 'profile'])->name('dashboard.help');
+    Route::get('/dashboard/documentation', [DashboardController::class, 'profile'])->name('dashboard.documentation');
+});
 
 // Profile Routes
 Route::middleware('auth')->group(function () {

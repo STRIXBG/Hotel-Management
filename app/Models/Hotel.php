@@ -16,6 +16,7 @@ class Hotel extends Model {
         'address',
         'phone',
         'city_id',
+        'user_id',
     ];
 
     public function city() {
@@ -28,5 +29,9 @@ class Hotel extends Model {
 
     public function reservations() {
         return $this->hasMany(Reservation::class);
+    }
+    
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

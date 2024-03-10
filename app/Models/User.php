@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\AppComment;
+use App\Models\Hotel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Authenticatable
-{
-    use HasApiTokens, HasFactory, Notifiable;
+class User extends Authenticatable {
+
+    use HasApiTokens,
+        HasFactory,
+        Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,12 +47,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
+
     /*
-     * Comment Check
+     * Comment Relation
      */
-    public function comments()
-    {
+
+    public function comments() {
         return $this->hasMany(AppComment::class);
+    }
+
+    /*
+     * Hotel Relation
+     */
+
+    public function hotels(): HasMany {
+        return $this->hasMany(Hotel::class);
     }
 }
