@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Cities</title>
+    <title>List of Comments</title>
 </head>
 <body>
-    <h1>List of Cities</h1>
+    <h1>List of Comments</h1>
 
     <ul>
-        @foreach ($cities as $city)
-            <li>{{ $city->name }}</li>
+        @foreach ($comments as $comment)
+            <li>Title: {{ $comment->title }}, Comment: {{ $comment->comment }}</li>
         @endforeach
     </ul>
 </body>
