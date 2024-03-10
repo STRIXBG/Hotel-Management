@@ -15,6 +15,8 @@ class Reservation extends Model {
         'start_date',
         'end_date',
         'user_id',
+        'customer_name',
+        'customer_family'
     ];
 
     public function hotel() {

@@ -18,13 +18,13 @@ return new class extends Migration {
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->date('start_date')->default(now());
             $table->date('end_date');
+            $table->string('customer_name');
+            $table->string('customer_family');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
-    
-    
 
     /**
      * Reverse the migrations.

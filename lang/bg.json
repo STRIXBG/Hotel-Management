@@ -20,5 +20,16 @@
     "Services": "Услуги",
     "Upgrade": "Надгради",
     "Documentation": "Документация",
-    "Help": "Помощ"
+    "Help": "Помощ",
+    "addHotel": "Можете да добавите :limit още хотел/а",
+    "ownedHotels": "Вие притежавате :hotels",
+    "You still don't have a hotel": "Все още нямате хотел",
+    "Click on ADD button to begin": "Натиснете бутона Добави, за да започнете",
+    "ADD": "Добави",
+    "You want to add a new hotel?": "Искате да добавите нов хотел?",
+    "Close and don't save": "Затоври и не запаметявай",
+    "Save changes": "Запази промените",
+    "See": "Преглед",
+    "Edit": "Редакция",
+    "Delete": "Изтрий"
 }

@@ -41,7 +41,13 @@ class HotelsController extends Controller {
             'phone' => 'required',
         ]);
 
-        Hotel::create($request->all());
+        Hotel::create([
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'city_id' =>$request->input('city_id'),
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect()->route('hotels.index')
                         ->with('success', 'Hotel created successfully');

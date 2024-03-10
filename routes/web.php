@@ -50,6 +50,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/hotels', [DashboardController::class, 'hotels'])->name('dashboard.hotels');
+    Route::get('/dashboard/hotels/{hotel}/edit', [DashboardController::class, 'editHotel'])->name('dashboard.hotels.edit');
+    Route::get('/dashboard/hotels/{hotel}/visit', [DashboardController::class, 'visitHotel'])->name('dashboard.hotels.visit');
+    Route::get('/dashboard/hotels/{hotel}/delete', [DashboardController::class, 'deleteHotel'])->name('dashboard.hotels.delete');
     Route::get('/dashboard/rooms', [DashboardController::class, 'profile'])->name('dashboard.rooms');
     Route::get('/dashboard/reservations', [DashboardController::class, 'profile'])->name('dashboard.reservations');
     Route::get('/dashboard/services', [DashboardController::class, 'profile'])->name('dashboard.services');
