@@ -43,8 +43,7 @@ class CitiesController extends Controller {
      * Shows City
      */
 
-    public function show($id) {
-        $city = City::findOrFail($id);
+    public function show(City $city) {
         return view('cities.show', compact('city'));
     }
 
@@ -52,8 +51,7 @@ class CitiesController extends Controller {
      * Edits selected city
      */
 
-    public function edit($id) {
-        $city = City::findOrFail($id);
+    public function edit(City $city) {
         return view('cities.edit', compact('city'));
     }
 
@@ -61,25 +59,22 @@ class CitiesController extends Controller {
      * Updates city
      */
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, City $city) {
         $request->validate([
-            'name' => 'required|unique:cities,name,' . $id,
-                // Add other validation rules if necessary
+            'name' => 'required|unique:cities',
         ]);
 
-        $city = City::findOrFail($id);
         $city->update($request->all());
 
         return redirect()->route('cities.index')
-                        ->with('success', 'City updated successfully');
+                        ->with('success', 'Hotel updated successfully');
     }
 
     /*
      * Destroys city
      */
 
-    public function destroy($id) {
-        $city = City::findOrFail($id);
+    public function destroy(City $city) {
         $city->delete();
 
         return redirect()->route('cities.index')

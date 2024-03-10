@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\AppComment;
 
 class User extends Authenticatable
 {
@@ -42,4 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
+    /*
+     * Comment Check
+     */
+    public function comments()
+    {
+        return $this->hasMany(AppComment::class);
+    }
 }

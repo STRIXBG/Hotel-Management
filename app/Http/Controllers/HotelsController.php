@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\City;
 use App\Models\Hotel;
 
@@ -30,6 +31,10 @@ class HotelsController extends Controller {
      */
 
     public function store(Request $request) {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please log in to create a new hotel.');
+        }
+
         $request->validate([
             'name' => 'required',
             'address' => 'required',
