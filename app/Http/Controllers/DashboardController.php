@@ -32,6 +32,25 @@ class DashboardController extends Controller {
             'cities' => $cities
         ]);
     }
+    
+    public function editHotel(Hotel $hotel) {
+        $user = Auth::user();
+        $hotels = $user->hotels()->get();
+        $reservations = $hotel->reservations()->get();
+        $rooms = $hotel->rooms()->get();
+        $hotels_count = count($hotels);
+        $cities = City::all();
+
+        return view('dashboard.hotels.edit', [
+            'hotels' => $hotels,
+            'hotel' => $hotel,
+            'hotels_count' => $hotels_count,
+            'section' => 'Hotels',
+            'rooms' => $rooms,
+            'cities' => $cities,
+            'reservations' => $reservations,
+        ]);
+    }
 
     public function visitHotel(Hotel $hotel) {
         $user = Auth::user();
